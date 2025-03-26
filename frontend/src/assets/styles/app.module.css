@@ -1,0 +1,89 @@
+/* App.module.css */
+
+/* Definindo variáveis para cores e fontes */
+:root {
+  --primary-color: #FF6347; /* Cor principal (Tom de vermelho) */
+  --secondary-color: #32CD32; /* Cor secundária (Tom de verde limão) */
+  --background-color: #282c34; /* Fundo escuro para contraste */
+  --text-color: #f4f4f4; /* Texto claro para contraste */
+  --highlight-color: #ff4500; /* Cor de destaque (laranja suave) */
+  --font-family: 'Arial', sans-serif;
+  --transition-speed: 0.3s; /* Velocidade da transição */
+  --button-text-color: #333; /* Cor do texto dos botões (escuro para contraste no fundo claro) */
+}
+
+/* Aplicando as variáveis globais */
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* App */
+.app {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh; /* Isso garante que a página ocupe toda a altura */
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Header */
+.header {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  transition: background-color var(--transition-speed);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  position: sticky;
+  top: 0;
+}
+
+.header .logo h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.header nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.header nav ul li {
+  margin: 0 15px;
+}
+
+.header nav ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: color var(--transition-speed), transform var(--transition-speed);
+}
+
+.header nav ul li a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+  transform: scale(1.1);
+}
+
+.header nav ul li button {
+  background: none;
+  border: none;
+  color: rgb(172, 164, 164);
+  cursor: pointer;
+  transition: color var(--transition-speed);
+}
+
+.header nav ul li button:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}

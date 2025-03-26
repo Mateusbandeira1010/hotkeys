@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Definindo um tamanho padrão para todas as divs */
+  div {
+    width: 100%;  /* Faz as divs ocuparem 100% da largura disponível */
+    min-height: 100px; /* Tamanho mínimo das divs */
+    padding: 20px;
+    margin-bottom: 20px; /* Espaçamento entre as divs */
+    background-color: #232020;
+    border-radius: 8px; /* Bordas arredondadas para as divs */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve para destacar as divs */
+  }
+  
+  /* Outros estilos globais */
+  body {
+    background-color: #fafafa; /* Cor de fundo da página */
+    color: #413939;
+    line-height: 1.6;
+  }
+  
+  

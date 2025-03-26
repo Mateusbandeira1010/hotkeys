@@ -1,0 +1,23 @@
+import { Routes, Route } from 'react-router-dom';
+import App from './App';
+import Login from './pages/login/login';  
+import Register from './pages/register/register';
+import styles from './assets/styles/index.module.css';
+import Perfil from './pages/perfil/perfil';  
+import Home from './pages/home/home';
+
+
+function Main() {
+  return (
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<Home />} /> 
+        <Route path="/login" element={<Login />} />
+        <Route path="/cad" element={<Register />} />
+        <Route path="/perfil" element={<Perfil />} /> 
+      </Route>
+    </Routes>
+  );
+}
+
+export default Main;

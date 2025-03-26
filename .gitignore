@@ -1,0 +1,11 @@
+# Node modules
+**/node_modules
+
+# Arquivos de ambiente
+**/.env
+
+# Build do Vite
+frontend/dist
+
+# Logs
+*.log
