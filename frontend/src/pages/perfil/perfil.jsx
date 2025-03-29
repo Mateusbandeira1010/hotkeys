@@ -5,14 +5,14 @@ import styles from "../../assets/styles/perfil.module.css";
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [hotkeys, setHotkeys] = useState([]);
   const [newHotkey, setNewHotkey] = useState('');
   const [action, setAction] = useState('create');
   const [selectedHotkeyId, setSelectedHotkeyId] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token'); 
   const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
 
   // Função para obter o perfil do usuário
@@ -83,20 +83,27 @@ const Profile = () => {
   // Função para fazer logout
   const handleLogout = () => {
     localStorage.removeItem('token');
-    setIsLoggedIn(false);
+    setIsLoggedIn(false); 
     navigate('/');
   };
 
   // UseEffect para carregar o perfil e as hotkeys ao carregar o componente
   useEffect(() => {
-    getProfile();
-    getHotkeys();
-  }, []);
+   
+    if (token) {
+      setIsLoggedIn(true);  
+      getProfile();         
+      getHotkeys();     
+    }
+  }, [token]);
 
+  // Renderiza a página
   return (
     <div className={styles.perfilContainer}>
       {error && <p>{error}</p>}
-      {profile && (
+
+      {/* Se o usuário estiver logado, exibe o perfil e hotkeys */}
+      {isLoggedIn && profile ? (
         <div>
           <h2>Bem-vindo, {profile.username}</h2>
           <h3>Suas Hotkeys:</h3>
@@ -123,10 +130,17 @@ const Profile = () => {
           <button onClick={handleHotkeyAction}>
             {action === 'create' ? 'Criar Hotkey' : action === 'update' ? 'Atualizar Hotkey' : 'Deletar Hotkey'}
           </button>
+
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        // Se não estiver logado, mostra uma mensagem
+        <div>
+          <h2>Você não está logado.</h2>
+          <button onClick={() => navigate('/login')}>Login</button>
+          <button onClick={() => navigate('/register')}>Cadastrar</button>
         </div>
       )}
-
-      {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
     </div>
   );
 };

@@ -27,7 +27,7 @@ function App() {
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/hotkeys">Hotkeys</Link></li>
+            <li><Link to="/hotkey">Hotkeys</Link></li>
             <li><Link to="/download">Download</Link></li>
             {username ? (
               <>
