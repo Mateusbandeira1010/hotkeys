@@ -1,7 +1,7 @@
 Hotkeys Blitzzone
 
 🎮 Hotkeys Blitzzone
-Hotkeys Manager é um sistema completo para criação, edição, exclusão e compartilhamento de hotkeys e macros voltado para jogos 2D, como Tibia, NTO Ultimate, Dragon Ball Online (DBO) e outros.
+Hotkeys Blitzzone é um sistema completo para criação, edição, exclusão e compartilhamento de hotkeys e macros voltado para jogos 2D, como Tibia, NTO Ultimate, Dragon Ball Online (DBO) e outros.
 
 O sistema permite que usuários cadastrados compartilhem seus códigos diretamente na plataforma, facilitando o acesso a configurações personalizadas para aprimorar a jogabilidade.
 
