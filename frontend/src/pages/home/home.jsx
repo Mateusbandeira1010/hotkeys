@@ -1,7 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../../assets/styles/home.module.css';
 
 function Home() {
+  const [hotkeys, setHotkeys] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
+
+  const fetchPublicHotkeys = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      console.log('Iniciando requisição de hotkeys...');
+      const startTime = Date.now();
+      
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hotkeys/public`, {
+        headers: {
+          'Accept': 'application/json',
+          'Cache-Control': 'no-cache'
+        }
+      });
+      
+      console.log(`Tempo de resposta: ${Date.now() - startTime}ms`);
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Erro HTTP: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Resposta completa:', result);
+      
+      if (!result.success || !Array.isArray(result.data)) {
+        throw new Error('Estrutura de resposta inválida');
+      }
+
+      setHotkeys(result.data.slice(0, 5));
+      setError(null);
+
+    } catch (err) {
+      console.error('Erro na requisição:', err);
+      setError(err.message || 'Erro desconhecido ao carregar hotkeys');
+      setHotkeys([]);
+      
+      // Tentar novamente após 5 segundos (máximo 3 tentativas)
+      if (retryCount < 3) {
+        setTimeout(() => {
+          setRetryCount(prev => prev + 1);
+        }, 5000);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPublicHotkeys();
+  }, [retryCount]);
+
   return (
     <div className={styles.home}>
       {/* Seção de Boas-vindas */}
@@ -17,15 +73,60 @@ function Home() {
         <p>Blitz Hotkeys é a ferramenta definitiva para aumentar sua produtividade. Organize e gerencie suas teclas de atalho de maneira simples e intuitiva.</p>
       </section>
 
-      {/* Seção Características */}
-      <section className={styles.caracteristicas} id="caracteristicas">
-        <h3>Características</h3>
-        <ul>
-          <li>Fácil configuração de atalhos</li>
-          <li>Suporte a múltiplas plataformas</li>
-          <li>Interface intuitiva e simples de usar</li>
-          <li>Funciona em segundo plano sem afetar seu desempenho</li>
-        </ul>
+      {/* Seção de Hotkeys Públicas */}
+      <section className={styles.hotkeysPublicas} id="hotkeys">
+        <h3>Hotkeys Recem Criadas</h3>
+        
+        {loading ? (
+          <div className={styles.loadingContainer}>
+            <div className={styles.spinner}></div>
+            <p>Carregando hotkeys...</p>
+            {retryCount > 0 && (
+              <p className={styles.retryMessage}>
+                Tentativa {retryCount + 1} de 3
+              </p>
+            )}
+          </div>
+        ) : error ? (
+          <div className={styles.errorContainer}>
+            <p className={styles.errorMessage}>{error}</p>
+            <button 
+              className={styles.retryButton}
+              onClick={() => setRetryCount(prev => prev + 1)}
+              disabled={retryCount >= 3}
+            >
+              {retryCount >= 3 ? 'Máximo de tentativas' : 'Tentar novamente'}
+            </button>
+          </div>
+        ) : hotkeys.length === 0 ? (
+          <div className={styles.emptyState}>
+            <p>Nenhuma hotkey pública disponível</p>
+            <p>Cadastre novas hotkeys para vê-las aqui</p>
+          </div>
+        ) : (
+          <div className={styles.hotkeyGrid}>
+            {hotkeys.map((item) => (
+              <div key={item.id} className={styles.hotkeyCard}>
+                <div className={styles.hotkeyHeader}>
+                  <span className={styles.hotkeyCombo}>{item.hotkey}</span>
+                  {item.author && (
+                    <span className={styles.hotkeyAuthor}>criado por {item.author}</span>
+                  )}
+                </div>
+                
+                {item.description && (
+                  <p className={styles.hotkeyDescription}>{item.description}</p>
+                )}
+                
+                <div className={styles.hotkeyFooter}>
+                  <span className={styles.hotkeyDate}>
+                    {new Date(item.createdAt).toLocaleDateString('pt-BR')}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Seção de Contato */}

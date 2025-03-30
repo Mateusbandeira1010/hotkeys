@@ -6,7 +6,7 @@
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "fastify": "^5.2.1",
+    "fastify": "^5.2.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.13.0",
     "pg": "^8.14.0",

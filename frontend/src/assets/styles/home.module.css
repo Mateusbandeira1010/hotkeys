@@ -1,82 +1,295 @@
+/* ===== BASE STYLES ===== */
 .home {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-  }
-  
-  /* Seção de boas-vindas */
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #2d3748;
+  line-height: 1.6;
+}
+
+/* ===== SECTION COMMON STYLES ===== */
+section {
+  margin-bottom: 50px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+section h2, 
+section h3 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* ===== WELCOME SECTION ===== */
+.welcome {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.welcome h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.welcome p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 1rem;
+  opacity: 0.9;
+}
+
+/* ===== ABOUT SECTION ===== */
+.sobre {
+  padding: 60px 40px;
+  background-color: #f8fafc;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.sobre h3 {
+  font-size: 2rem;
+  color: #4f46e5;
+}
+
+.sobre p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #4a5568;
+}
+
+/* ===== HOTKEYS SECTION ===== */
+.hotkeysPublicas {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.hotkeysPublicas h3 {
+  font-size: 2rem;
+  color: #4f46e5;
+  margin-bottom: 2rem;
+}
+
+.hotkeyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.hotkeyCard {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+
+.hotkeyCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.hotkeyHeader {
+  margin-bottom: 15px;
+}
+
+.hotkeyCombo {
+  display: inline-block;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4f46e5;
+  background-color: #eef2ff;
+  padding: 8px 15px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.hotkeyAuthor {
+  display: block;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.hotkeyDescription {
+  color: #475569;
+  font-size: 1rem;
+  margin: 15px 0;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.hotkeyFooter {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* ===== CONTACT SECTION ===== */
+.contato {
+  padding: 60px 40px;
+  background-color: #f8fafc;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.contato h3 {
+  font-size: 2rem;
+  color: #4f46e5;
+}
+
+.contato p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.contato a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contato a:hover {
+  text-decoration: underline;
+}
+
+/* ===== LOADING STATES ===== */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  grid-column: 1 / -1;
+}
+
+.spinner {
+  border: 4px solid rgba(79, 70, 229, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #4f46e5;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.retryMessage {
+  color: #64748b;
+  margin-top: 10px;
+}
+
+/* ===== ERROR STATES ===== */
+.errorContainer {
+  text-align: center;
+  padding: 40px 20px;
+  grid-column: 1 / -1;
+}
+
+.errorMessage {
+  color: #dc2626;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.retryButton {
+  padding: 10px 24px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retryButton:hover {
+  background-color: #4338ca;
+}
+
+.retryButton:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* ===== EMPTY STATE ===== */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  grid-column: 1 / -1;
+  color: #64748b;
+}
+
+.emptyState p {
+  margin-bottom: 0.5rem;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
   .welcome {
     padding: 60px 20px;
-    text-align: center;
-    background-color: #4CAF50; /* Verde */
-    color: white;
   }
   
   .welcome h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .welcome p {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  
-  /* Seção Sobre */
-  .sobre {
-    padding: 50px 20px;
-    background-color: #f4f4f4;
-    text-align: center;
-  }
-  
-  .sobre h3 {
     font-size: 2rem;
-    margin-bottom: 20px;
   }
   
-  .sobre p {
-    font-size: 1.1rem;
-    color: #333;
+  .hotkeyGrid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+    gap: 20px;
   }
   
-  /* Seção Características */
-  .caracteristicas {
+  section {
+    margin-bottom: 40px;
+  }
+  
+  .sobre, .contato {
     padding: 50px 20px;
-    background-color: #ffffff;
-    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 15px;
   }
   
-  .caracteristicas h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+  .welcome {
+    padding: 50px 15px;
   }
   
-  .caracteristicas ul {
-    list-style-type: none;
-    padding: 0;
+  .welcome h2 {
+    font-size: 1.8rem;
   }
   
-  .caracteristicas li {
-    font-size: 1.2rem;
-    color: #555;
-    margin: 10px 0;
-  }
-  
-  /* Seção Contato */
-  .contato {
-    padding: 50px 20px;
-    background-color: #eee;
-    text-align: center;
-  }
-  
-  .contato h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
+  .welcome p, 
+  .sobre p, 
   .contato p {
-    font-size: 1.1rem;
-    color: #333;
+    font-size: 1rem;
   }
   
+  .hotkeyCard {
+    padding: 20px;
+  }
+}

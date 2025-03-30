@@ -1,19 +1,27 @@
 import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import userRoutes from './routes/routes.js';
+import Hotkeys from './models/hotkeys.js';
+import User from './models/User.js';
+
 
 const fastify = Fastify({ logger: true });
 
 fastify.register(fastifyCors, {
   origin: 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'] 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 });
 
 fastify.register(userRoutes);
 
-fastify.get('/api/mensagem', async (request, reply) => {
-  return { mensagem: 'Olá sou do backend!' };
-});
+Hotkeys.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Hotkeys, { foreignKey: 'userId' });
+
+//test
+//fastify.get('/api/mensagem', async (request, reply) => {
+  //return { mensagem: 'Olá sou do backend!' };
+//});
+
 
 
 const start = async () => {

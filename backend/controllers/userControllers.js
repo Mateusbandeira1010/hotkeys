@@ -3,6 +3,9 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../models/User.js';
 import Hotkeys from '../models/hotkeys.js';
+import sequelize from '../config/database.js';
+
+
 
 dotenv.config();
 
@@ -36,6 +39,7 @@ export const loginUser = async (request, reply) => {
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) return reply.status(400).send({ message: 'Senha incorreta' });
+    console.log('Chave Secreta:', process.env.SECRET_KEY);
 
     const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, { expiresIn: '30m' });
     console.log('Chave Secreta:', process.env.SECRET_KEY);
@@ -134,6 +138,8 @@ export const getHotkeys = async (request, reply) => {
   try {
     const tokenWithoutBearer = token.split(' ')[1];
     const decoded = jwt.verify(tokenWithoutBearer, process.env.SECRET_KEY);
+    
+    
 
     const user = await User.findByPk(decoded.userId);
     if (!user) return reply.status(404).send({ message: 'Usuário não encontrado' });
@@ -147,3 +153,60 @@ export const getHotkeys = async (request, reply) => {
     return reply.status(500).send({ message: 'Erro no servidor', error });
   }
 };
+
+
+// obter as hotkeys sem token no home.jsx
+
+export const gethotkeypublic = async (request, reply) => {
+  try {
+    console.log('Iniciando busca por hotkeys públicas...');
+    
+    // Verifica se a coluna description existe
+    const [results] = await sequelize.query(
+      "SHOW COLUMNS FROM Hotkeys LIKE 'description'"
+    );
+    const hasDescription = results.length > 0;
+    
+    const attributes = ['id', 'hotkey', 'createdAt'];
+    if (hasDescription) {
+      attributes.push('description');
+    }
+
+    const hotkeys = await Hotkeys.findAll({
+      order: [['createdAt', 'DESC']],
+      limit: 10,
+      attributes,
+      include: [{
+        model: User,
+        attributes: ['username'],
+        required: false
+      }]
+    });
+
+    console.log(`Encontradas ${hotkeys.length} hotkeys`);
+    
+    // Formato de resposta padronizado
+    return {
+      success: true,
+      data: hotkeys.map(h => ({
+        id: h.id,
+        hotkey: h.hotkey,
+        description: hasDescription ? h.description : null,
+        createdAt: h.createdAt,
+        author: h.User?.username || 'Anônimo'
+      })),
+      timestamp: new Date()
+    };
+
+  } catch (error) {
+    console.error('Erro no backend:', error);
+    return reply.status(500).send({
+      success: false,
+      message: 'Erro ao carregar hotkeys públicas',
+      error: process.env.NODE_ENV === 'development' ? {
+        message: error.message,
+        stack: error.stack
+      } : undefined
+    });
+  }
+}

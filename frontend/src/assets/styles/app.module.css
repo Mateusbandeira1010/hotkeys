@@ -1,89 +1,190 @@
-/* App.module.css */
+/* App.module.css - Versão Atualizada com Header Centralizado */
 
-/* Definindo variáveis para cores e fontes */
+/* Variáveis atualizadas */
 :root {
-  --primary-color: #FF6347; /* Cor principal (Tom de vermelho) */
-  --secondary-color: #32CD32; /* Cor secundária (Tom de verde limão) */
-  --background-color: #282c34; /* Fundo escuro para contraste */
-  --text-color: #f4f4f4; /* Texto claro para contraste */
-  --highlight-color: #ff4500; /* Cor de destaque (laranja suave) */
-  --font-family: 'Arial', sans-serif;
-  --transition-speed: 0.3s; /* Velocidade da transição */
-  --button-text-color: #333; /* Cor do texto dos botões (escuro para contraste no fundo claro) */
+  --primary-color: #FF6347;
+  --secondary-color: #32CD32;
+  --background-color: #282c34;
+  --text-color: #f4f4f4;
+  --highlight-color: #ff4500;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --transition-speed: 0.3s;
+  --button-text-color: #333;
+  --header-bg: #2c3e50;
+  --nav-hover: #3498db;
+  --logout-hover: #e74c3c;
+  --success-color: #27ae60;
 }
 
-/* Aplicando as variáveis globais */
-body {
-  font-family: var(--font-family);
-  background-color: var(--background-color);
-  color: var(--text-color);
-  margin: 0;
-  padding: 0;
-}
-
-/* App */
+/* Estilos gerais atualizados */
 .app {
-  font-family: var(--font-family);
-  background-color: var(--background-color);
-  color: var(--text-color);
-  min-height: 100vh; /* Isso garante que a página ocupe toda a altura */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-/* Header */
+/* Header centralizado */
 .header {
-  background-color: #333;
+  background-color: var(--header-bg);
   color: white;
-  padding: 20px 0;
-  text-align: center;
-  transition: background-color var(--transition-speed);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 100;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
+  z-index: 100;
+  text-align: center;
 }
 
-.header .logo h1 {
-  margin: 0;
-  font-size: 2em;
+.logo h1 {
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+  color: #ecf0f1;
 }
 
-.header nav ul {
-  list-style-type: none;
-  padding: 0;
+/* Navegação atualizada */
+.nav {
   display: flex;
+  width: 100%;
   justify-content: center;
-  margin-top: 10px;
 }
 
-.header nav ul li {
-  margin: 0 15px;
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.header nav ul li a {
-  color: var(--text-color);
+.navItem {
+  display: flex;
+  align-items: center;
+}
+
+.navLink {
+  color: #ecf0f1;
   text-decoration: none;
-  font-size: 1.2em;
-  transition: color var(--transition-speed), transform var(--transition-speed);
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: all var(--transition-speed);
+  font-size: 1.1rem;
 }
 
-.header nav ul li a:hover {
-  color: var(--primary-color);
-  text-decoration: underline;
-  transform: scale(1.1);
+.navLink:hover {
+  color: var(--nav-hover);
+  text-decoration: none;
+  transform: scale(1.05);
 }
 
-.header nav ul li button {
+.username {
+  font-weight: bold;
+  color: var(--nav-hover);
+}
+
+/* Botão de logout atualizado */
+.logoutButton {
   background: none;
   border: none;
-  color: rgb(172, 164, 164);
+  color: #ecf0f1;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: color var(--transition-speed);
+  padding: 0.5rem 0;
+  transition: all var(--transition-speed);
 }
 
-.header nav ul li button:hover {
-  color: var(--primary-color);
-  transform: scale(1.1);
+.logoutButton:hover {
+  color: var(--logout-hover);
+  transform: scale(1.05);
+}
+
+/* Conteúdo principal */
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Mensagem de logout (nova) */
+.logoutMessage {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--success-color);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fadeInOut 2s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; top: 0; }
+  10% { opacity: 1; top: 20px; }
+  90% { opacity: 1; top: 20px; }
+  100% { opacity: 0; top: 0; }
+}
+
+/* Efeitos adicionais */
+.navItem {
+  position: relative;
+}
+
+.navItem::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width var(--transition-speed);
+}
+
+.navItem:hover::after {
+  width: 100%;
+}
+
+/* Melhorias de acessibilidade */
+.navLink:focus,
+.logoutButton:focus {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 2px;
+}
+
+/* Responsividade atualizada */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+  
+  .logo h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .navList {
+    gap: 1rem;
+  }
+  
+  .mainContent {
+    padding: 1rem;
+  }
+
+  .navLink, .logoutButton {
+    font-size: 1rem;
+  }
 }
