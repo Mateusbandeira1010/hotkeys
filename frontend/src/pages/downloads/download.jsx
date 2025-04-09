@@ -6,31 +6,59 @@ const Download = () => {
   const clients = [
     {
       id: 1,
-      name: 'Cliente Corporativo v2.1',
-      description: 'Versão mais recente do cliente para empresas',
-      version: '2.1.0',
-      releaseDate: '15/10/2023',
-      fileSize: '45 MB',
+      name: 'OTClient V8',
+      description: 'Versão mais recente alterado por Blitz',
+      version: '5.2',
+      releaseDate: '02/04/2025',
+      fileSize: '25 MB',
       downloadLink: '#'
     },
     {
       id: 2,
-      name: 'Cliente Básico v1.8',
-      description: 'Versão simplificada para usuários individuais',
-      version: '1.8.2',
-      releaseDate: '05/09/2023',
-      fileSize: '32 MB',
+      name: 'Tibia 8.60 (Cliente Proprio e Maneiro)',
+      description: 'Versão simplificada para usuários de PUSH e PVP',
+      version: '8.2',
+      releaseDate: '02/04/2025',
+      fileSize: '2.350 KB',
       downloadLink: '#'
     },
     {
       id: 3,
-      name: 'Cliente Básico v1.8',
-      description: 'Versão simplificada para usuários individuais',
-      version: '1.8.2',
-      releaseDate: '05/09/2023',
+      name: 'Elf bot',
+      description: 'Versão com um pack de script',
+      version: '8.2',
+      releaseDate: '02/04/2025',
       fileSize: '32 MB',
       downloadLink: '#'
+    },
+
+    {
+      id: 4,
+      name: 'Ip Change',
+      description: 'Todas as versões',
+      version: 'Todas versões',
+      releaseDate: '02/04/2025',
+      fileSize: '30 MB',
+      downloadLink: '#'
+    },
+
+    {
+      id: 5,
+      name: 'Sprites',
+      description: 'Sprites para o OTClient V8',
+      releaseDate: '02/04/2025',
+      downloadLink: '#'
+    },
+
+    {
+      id: 6,
+      name: 'Data',
+      description: 'Data para o OTClient V8',
+      releaseDate: '02/04/2025',
+      downloadLink: '#'
     }
+
+
   ];
 
   const handleDownload = (clientName) => {

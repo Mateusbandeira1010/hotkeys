@@ -6,6 +6,7 @@ import Perfil from './pages/perfil/perfil';
 import Home from './pages/home/home';
 import Download from './pages/downloads/download';
 import Hotkey from './pages/hotkeys/hotkey';
+import Discord from './pages/discord/discord';
 
 
 function Main() {
@@ -18,6 +19,7 @@ function Main() {
         <Route path="/download" element={<Download />} />
         <Route path="/cad" element={<Register />} />
         <Route path="/perfil" element={<Perfil />} /> 
+        <Route path="/discord" element={<Discord />} />
       </Route>
     </Routes>
   );

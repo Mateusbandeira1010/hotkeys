@@ -161,7 +161,6 @@ export const gethotkeypublic = async (request, reply) => {
   try {
     console.log('Iniciando busca por hotkeys públicas...');
     
-    // Verifica se a coluna description existe
     const [results] = await sequelize.query(
       "SHOW COLUMNS FROM Hotkeys LIKE 'description'"
     );
@@ -185,7 +184,7 @@ export const gethotkeypublic = async (request, reply) => {
 
     console.log(`Encontradas ${hotkeys.length} hotkeys`);
     
-    // Formato de resposta padronizado
+    
     return {
       success: true,
       data: hotkeys.map(h => ({

@@ -5,12 +5,26 @@ import styles from './assets/styles/app.module.css';
 function App() {
   const [username, setUsername] = useState(null);
   const [showLogoutMessage, setShowLogoutMessage] = useState(false);
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
+    const loginMessage = localStorage.getItem('loginMessage');
+
     if (storedUsername) {
       setUsername(storedUsername);
+    }
+
+    // Exibe mensagem de login, se houver
+    if (loginMessage === 'true') {
+      setShowLoginMessage(true);
+
+      setTimeout(() => {
+        setShowLoginMessage(false);
+        localStorage.removeItem('loginMessage');
+        window.location.reload();
+      }, 2000);
     }
   }, []);
 
@@ -19,17 +33,22 @@ function App() {
     localStorage.removeItem('token');
     setUsername(null);
     setShowLogoutMessage(true);
-    
-    // Mostra mensagem por 2 segundos antes de redirecionar
+
     setTimeout(() => {
       setShowLogoutMessage(false);
       navigate('/');
+      window.location.reload();
     }, 2000);
   };
 
   return (
     <div className={styles.app}>
-      {/* Mensagem de logout */}
+      {/* Mensagens de login/logout */}
+      {showLoginMessage && (
+        <div className={styles.logoutMessage}>
+          Login realizado com sucesso. Redirecionando...
+        </div>
+      )}
       {showLogoutMessage && (
         <div className={styles.logoutMessage}>
           Logout realizado com sucesso. Redirecionando...
@@ -44,6 +63,7 @@ function App() {
           <ul className={styles.navList}>
             <li className={styles.navItem}><Link to="/" className={styles.navLink}>Home</Link></li>
             <li className={styles.navItem}><Link to="/hotkey" className={styles.navLink}>Hotkeys</Link></li>
+            <li className={styles.navItem}><Link to="/discord" className={styles.navLink}>Discord</Link></li>
             <li className={styles.navItem}><Link to="/download" className={styles.navLink}>Download</Link></li>
             {username ? (
               <>

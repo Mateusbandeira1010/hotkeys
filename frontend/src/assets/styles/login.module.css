@@ -43,3 +43,16 @@
 .loginContainer button:hover {
   background-color: #0056b3;
 }
+
+
+.loginMessage {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border: 1px solid #c3e6cb;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+

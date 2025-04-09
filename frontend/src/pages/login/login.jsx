@@ -5,6 +5,7 @@ import styles from '../../assets/styles/login.module.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
   const navigate = useNavigate();  
 
   const handleLogin = async (e) => {
@@ -23,41 +24,57 @@ const Login = () => {
         const data = await response.json();
         localStorage.setItem('username', data.username);
         localStorage.setItem('token', data.token);
-        console.log('Login bem-sucedido:', data.username);
-        navigate('/perfil');
+
+        setShowLoginMessage(true);
+
+        // Espera 2 segundos para redirecionar
+        setTimeout(() => {
+          navigate('/perfil');
+          window.location.reload();
+        }, 2000);
       } else {
         const errorData = await response.json();
-        console.error('Erro ao fazer login:', errorData.message);
         alert(`Erro: ${errorData.message}`);
       }
     } catch (error) {
-      console.error('Erro na requisição de login:', error);
       alert('Erro ao se conectar ao servidor!');
     }
   };
 
   return (
     <div className={styles.loginContainer}> 
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          placeholder='Digite seu Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label>Senha:</label>
-        <input
-          type="password"
-          name="password"
-          placeholder='Digite sua Senha'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Entrar</button>
-      </form>
+      {showLoginMessage && (
+        <div className={styles.loginMessage}>
+          Login realizado com sucesso. Redirecionando...
+        </div>
+      )}
+
+      {!showLoginMessage && (
+        <>
+          <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              placeholder='Digite seu Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label>Senha:</label>
+            <input
+              type="password"
+              name="password"
+              placeholder='Digite sua Senha'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit">Entrar</button>
+          </form>
+        </>
+      )}
     </div>
   );
 };

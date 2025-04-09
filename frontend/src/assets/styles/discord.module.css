@@ -1,0 +1,62 @@
+.discordContainer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    color: #f4f4f4;
+    background-color: #1e1e2f;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .discordButton {
+    background-color: #5865f2;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .discordButton:hover {
+    background-color: #4752c4;
+  }
+  
+  .discordImage {
+    display: block;
+    max-width: 100%;
+    max-height: 10%;
+    margin: 0 auto 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .features {
+    padding: 1rem;
+    background-color: #2e2e3e;
+    border-radius: 8px;
+  }
+  
+  .features h2 {
+    margin-bottom: 1rem;
+    color: #00ffe0;
+  }
+  
+  .features ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .features li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #444;
+    font-size: 1.1rem;
+  }
+  
