@@ -11,7 +11,6 @@ function Home() {
     try {
       setLoading(true);
       setError(null);
-      console.log('Iniciando requisição de hotkeys...');
       const startTime = Date.now();
       
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hotkeys/public`, {
@@ -21,7 +20,6 @@ function Home() {
         }
       });
       
-      console.log(`Tempo de resposta: ${Date.now() - startTime}ms`);
       
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -29,14 +27,14 @@ function Home() {
       }
 
       const result = await response.json();
-      console.log('Resposta completa:', result);
       
       if (!result.success || !Array.isArray(result.data)) {
         throw new Error('Estrutura de resposta inválida');
       }
+      
 
-      setHotkeys(result.data.slice(0, 5));
-      setError(null);
+      setHotkeys(result.data);
+      
 
     } catch (err) {
       console.error('Erro na requisição:', err);

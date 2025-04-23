@@ -159,8 +159,6 @@ export const getHotkeys = async (request, reply) => {
 
 export const gethotkeypublic = async (request, reply) => {
   try {
-    console.log('Iniciando busca por hotkeys públicas...');
-    
     const [results] = await sequelize.query(
       "SHOW COLUMNS FROM Hotkeys LIKE 'description'"
     );
@@ -173,7 +171,7 @@ export const gethotkeypublic = async (request, reply) => {
 
     const hotkeys = await Hotkeys.findAll({
       order: [['createdAt', 'DESC']],
-      limit: 10,
+      limit: 12,
       attributes,
       include: [{
         model: User,
@@ -182,8 +180,6 @@ export const gethotkeypublic = async (request, reply) => {
       }]
     });
 
-    console.log(`Encontradas ${hotkeys.length} hotkeys`);
-    
     
     return {
       success: true,
